@@ -81,7 +81,7 @@ class DoctorController extends Controller
             'address' => 'required',
         ]);
 
-        $doctor = new Doctor();
+        $doctor = Doctor::find($id);
         $doctor->name = $request->name;
         $doctor->speciality = $request->speciality;
         $doctor->license_number = $request->license_number;
