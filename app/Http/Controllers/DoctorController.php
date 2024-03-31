@@ -35,7 +35,7 @@ class DoctorController extends Controller
             'license_number' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            //'photo' => 'required',
+            'photo' => 'required',
             'address' => 'required',
             'nik' => 'required',
         ]);
@@ -50,9 +50,14 @@ class DoctorController extends Controller
         $doctor->nik = $request->nik;
         $doctor->id_ihs = $request->id_ihs;
 
-        if ($request->photo) {
-            $doctor->photo = $request->photo;
-        }
+        $doctor->save();
+
+        $photo = $request->file('photo');
+        $current_time = round(microtime(true) * 1000);
+            $photo_title = $doctor->id . '-' . $current_time . '.' . $photo->getClientOriginalExtension();
+        $photo->storeAs('public/images/doctor/', $photo_title);
+
+        $doctor->photo = 'storage/images/doctor/' . $photo_title;
         $doctor->save();
 
         return redirect()->route('doctors.index')->with('success', 'Doctor created successfully.');
@@ -83,6 +88,7 @@ class DoctorController extends Controller
             'phone' => 'required',
             //'photo' => 'required',
             'address' => 'required',
+            'nik' => 'required',
         ]);
 
         $doctor = Doctor::find($id);
@@ -92,10 +98,18 @@ class DoctorController extends Controller
         $doctor->email = $request->email;
         $doctor->phone = $request->phone;
         $doctor->address = $request->address;
-        if ($request->photo) {
-            $doctor->photo = $request->photo;
-        }
+        $doctor->nik = $request->nik;
+        $doctor->id_ihs = $request->id_ihs;
         $doctor->save();
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $current_time = round(microtime(true) * 1000);
+            $photo_title = $doctor->id . '-' . $current_time . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('public/images/doctor/', $photo_title);
+            $doctor->photo = 'storage/images/doctor/' . $photo_title;
+            $doctor->save();
+        }
 
         return redirect()->route('doctors.index')->with('success', 'Doctor updated successfully.');
     }
