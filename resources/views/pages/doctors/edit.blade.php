@@ -30,14 +30,22 @@
 
 
                 <div class="card">
-                    <form action="{{ route('doctors.update', $doctor) }}" method="POST">
+                    <form action="{{ route('doctors.update', $doctor) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-header">
                             <h4>Input Text</h4>
                         </div>
                         <div class="card-body">
-
+                            <div class="form-group">
+                                <label class="form-label">Photo</label>
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" id="photo">
+                                @error('photo')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $doctor->name }}">
