@@ -38,6 +38,15 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>NIK</label>
+                                <input type="number" class="form-control @error('nik') is-invalid @enderror" name="nik">
+                                @error('nik')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Specialist</label>
                                 <input type="text" class="form-control @error('speciality') is-invalid @enderror" name="speciality">
                                 @error('speciality')
@@ -50,6 +59,15 @@
                                 <label>SIP</label>
                                 <input type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number">
                                 @error('license_number')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>ID IHS</label>
+                                <input type="text" class="form-control @error('id_ihs') is-invalid @enderror" name="id_ihs">
+                                @error('id_ihs')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
