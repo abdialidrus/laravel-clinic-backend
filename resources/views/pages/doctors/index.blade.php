@@ -48,6 +48,7 @@
                                     <table class="table-striped table">
                                         <tr>
 
+                                            <th>Photo</th>
                                             <th>Name</th>
                                             <th>Specialist</th>
                                             <th>SIP</th>
@@ -59,7 +60,13 @@
                                         </tr>
                                         @foreach ($doctors as $doctor)
                                             <tr>
-
+                                                <td>
+                                                    @if ($doctor->photo)
+                                                        <img src="{{ asset($doctor->photo) }}" alt="" width="100" class="img-thumbnail">
+                                                    @else
+                                                        <span class="badge badge-danger">No image</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     {{ $doctor->name }}
                                                 </td>
