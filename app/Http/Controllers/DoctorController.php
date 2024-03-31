@@ -37,6 +37,7 @@ class DoctorController extends Controller
             'phone' => 'required',
             //'photo' => 'required',
             'address' => 'required',
+            'nik' => 'required',
         ]);
 
         $doctor = new Doctor();
@@ -46,6 +47,9 @@ class DoctorController extends Controller
         $doctor->email = $request->email;
         $doctor->phone = $request->phone;
         $doctor->address = $request->address;
+        $doctor->nik = $request->nik;
+        $doctor->id_ihs = $request->id_ihs;
+
         if ($request->photo) {
             $doctor->photo = $request->photo;
         }
