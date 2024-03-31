@@ -25,9 +25,18 @@
 
             <div class="section-body">
                 <div class="card">
-                    <form action="{{ route('doctors.store') }}" method="POST">
+                    <form action="{{ route('doctors.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Photo</label>
+                                <input type="file" class="form-control @error('name') is-invalid @enderror" name="photo" id="photo" >
+                                @error('photo')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
@@ -113,4 +122,5 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
 @endpush
